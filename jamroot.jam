@@ -4,17 +4,19 @@ path-constant here : . ;
 
 lib libpq : : <name>$(libpq-name) <search>$(libpq-lib-dir) ;
 
+lib libboost_date_time : : <name>boost_date_time <search>$(boost-lib-dir) ;
+
 requirements =
 	<include>$(here)/include
 	<include>$(libpq-include-dir)
-	<library>/boost//date_time
+        <include>$(boost-include-dir)
 	;
 
 project : usage-requirements $(requirements) ;
 
 alias sources : [ path.glob-tree $(here)/src : *.cpp ] ;
 
-alias libs : /quince//quince libpq/<link>shared ;
+alias libs : /quince//quince libpq/<link>shared libboost_date_time ;
 
 lib quince-postgresql
 	: sources libs
